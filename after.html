@@ -1,0 +1,475 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>UW ARIA Bootcamp</title>
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+    <style>
+      /* Overall structure */
+      body {
+        font-family: Arial, Helvetica, sans-serif;
+        font-size: 1em;
+        line-height: 1.5em;
+        color: black;
+        background-color: white;
+        margin: 0;
+        padding: 0;
+      }
+      header,
+      footer {
+        background-color: #4b2e83;
+        padding: 1em;
+        color: white;
+      }
+      main {
+        float: left;
+        margin: 1em;
+        width: 65%;
+      }
+      aside {
+        float: left;
+        width: 30%;
+        border-left: 1px solid #999;
+        padding-left: 1em;
+      }
+      footer {
+        clear: left;
+      }
+
+      /* Banner */
+      #uw-name {
+        font-weight: bold;
+        font-size: 1.2em;
+        margin: 0.5em 0;
+      }
+      h1#event-name {
+        font-weight: bold;
+        font-size: 1.8em;
+        margin: 0.35em 0 0.5em;
+      }
+
+      /* Menu */
+      #menu-toggle {
+        font-size: 1.4em;
+        margin: 1em 0.5em 0;
+        padding: 0.5em;
+        border: 2px solid #999;
+        width: 8em;
+        text-align: center;
+      }
+      #menu-toggle:hover,
+      #menu-toggle:focus {
+        background-color: #4b2e83;
+        color: white;
+      }
+      #menu {
+        display: none;
+      }
+      #menu ul {
+        list-style-type: none;
+        width: 10em;
+        margin: 0 1em;
+        padding-left: 0;
+        border: 1px solid #999;
+      }
+      #menu ul li {
+        border-bottom: 1px solid #CCC;
+        font-size: 1.2em;
+      }
+      #menu ul li a {
+        display: block;
+        padding: 0.25em;
+        color: #4b2e83;
+        background-color: white;
+        text-decoration: none;
+      }
+      #menu ul li a:hover,
+      #menu ul li a:focus {
+        background-color: #4b2e83;
+        color: white;
+      }
+
+      /* Main */
+      h2 {
+        font-size: 1.2em;
+        font-weight: bold;
+      }
+
+      /* Form */
+      form div,
+      form p {
+        margin: 1em;
+      }
+      label {
+        display: block;
+        margin-bottom: 0.25em;
+        font-weight: bold;
+      }
+      input,
+      textarea {
+        margin: 0 1.5em;
+        max-width: 90%;
+        font-family: Arial, Helvetica, sans-serif;
+        font-size: 1em;
+        font-weight: normal;
+      }
+      input[type="text"] {
+        width: 30em;
+      }
+      textarea {
+        height: 10em;
+        width: 40em;
+        padding: 0.5em;
+      }
+      #instructions {
+        color: #757575;
+        margin: 0 1.25em;
+      }
+      input#submit {
+        font-size: 1.1em;
+      }
+      #error {
+        display: none;
+        margin: 1em;
+        padding: 1em;
+        font-weight: bold;
+        background-color: #FFC;
+        border: 1px solid #4b2e83;
+        width: 20em;
+      }
+
+      /* Sidebar */
+      aside ul {
+        margin-left: 0;
+        padding-left: 1em;
+      }
+
+      /* Footer */
+      footer {
+        text-align: center;
+      }
+      footer ul {
+        list-style-type: none;
+      }
+      footer ul li {
+        display: inline;
+      }
+      footer a {
+        color: white;
+      }
+      footer nav {
+        margin-bottom: 1em;
+      }
+      footer nav a {
+        text-decoration: none;
+        padding: 0 0.5em;
+      }
+      #copyright {
+        font-size: 0.9em;
+        letter-spacing: 0.1em;
+      }
+
+      /* Modal pop-up */
+      #modal-overlay {
+        display: none;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: black;
+        opacity: 0.8;
+        z-index: 1000;
+      }
+      #modal {
+        display: none;
+        position: fixed;
+        top: 20%;
+        left: 35%;
+        right: 35%;
+        /* height: 40%;*/
+        padding: 1em;
+        border: 1px solid black;
+        background-color: white;
+        opacity: 1;
+        font-size: 1.1em;
+        text-align: center;
+        z-index: 2000;
+      }
+      #modal h1 {
+        font-family: 'Old English Text MT', 'Schwabacher', cursive;
+        font-size: 2em;
+        font-weight: bold;
+        margin: 0.25em 0 1em;
+        line-height: 1em;
+      }
+      #modal button {
+        margin-top: 1em;
+        font-size: 1.1em;
+        border-radius: 5px;
+      }
+
+      /* Visual focus indicator */
+      /* Approximates default indicator in WebKit */
+      a:hover,
+      input:hover,
+      textarea:hover,
+      button:hover,
+      *:focus {
+        border: 1px solid #78aed9 !important;
+        box-shadow: 0 1px 1px rgba(0, 0, 0, 0.075) inset, 0 0 8px rgba(102, 175, 233, 0.6) !important;
+        outline: 0 none !important;
+        text-decoration: none;
+      }
+      /* No need for dotted border on buttons in Firefox */
+      *::-moz-focus-inner {
+        border: 0;
+      }
+
+      /* Menu has its own focus indicator */
+      #menu a:hover,
+      #menu a:focus {
+        border: none !important;
+        box-shadow: none !important;
+        outline: none !important;
+      }
+
+    </style>
+    <script>
+      $(document).ready(function() {
+
+        // create an array of items in the main menu
+        var menuItems = $('#menu a');
+
+        // handle click on menu button
+        $('#menu-toggle').on('click',function(e) {
+          if ($('#menu').is(':visible')) {
+            hideMenu();
+          }
+          else {
+            showMenu();
+          }
+        });
+
+        // handle keystrokes on menu
+        $('#menu-toggle, #menu a').on('keydown',function(e) {
+          if (e.which === 27) { // escape
+            e.preventDefault();
+            hideMenu();
+          }
+          else if (e.target.id === 'menu-toggle') {
+            // space, enter, right arrow or down arrow
+            if (e.which === 13 || e.which === 32 || e.which === 39 || e.which === 40) {
+              e.preventDefault();
+              showMenu();
+            }
+          }
+          else {
+            // this is a menu item
+            var menuItemIndex = $(this).parent().index();
+            if (e.which === 39 || e.which === 40) { // right or down arrow
+              e.preventDefault();
+              if (menuItemIndex === (menuItems.length - 1)) { // this is the last menu item
+                var targetMenuItemIndex = 0; // wrap to top
+              }
+              else {
+                var targetMenuItemIndex = menuItemIndex + 1; // move to next item
+              }
+            }
+            else if (e.which === 37 || e.which === 38) { // left or up arrow
+              e.preventDefault();
+              if (menuItemIndex === 0) { // this is the first menu item
+                var targetMenuItemIndex = menuItems.length - 1; // wrap to bottom
+              }
+              else {
+                var targetMenuItemIndex = menuItemIndex - 1; // move to next item
+              }
+            }
+            $('#menu a').eq(targetMenuItemIndex).focus();
+          }
+        });
+
+        // handle form submission
+        $('#submit').on('click',function(e) {
+
+          e.preventDefault();
+
+          // check for empty required fields
+          if ( !$('#name').val() ) {
+            $('#error').text('Please enter your name').show();
+            // place focus in the field with an errror
+            $('#name').focus();
+          }
+          else if ( !$('#question').val() ) {
+            $('#error').text('Please answer the question!').show();
+            // place focus in the field with an errror
+            $('#question').focus();
+          }
+          else {
+            // populate certificate with user's name, then show it
+            var participant = $('#name').val();
+            $('#participant').text(participant);
+            $('#has-have').text('has');
+            showModal();
+          }
+
+          // handle click on ok button within modal
+          $('#ok').on('click',function() {
+            hideModal();
+          });
+        });
+
+      });
+
+      function showMenu() {
+        $('#menu').show();
+        // place focus on first item in menu
+        $('#menu a').first().focus();
+        // refresh button text to reflect current state
+        $('#menu-toggle').attr('aria-expanded','true').text('Hide Menu');
+      }
+
+      function hideMenu() {
+        $('#menu').hide();
+        // place focus on menu toggle button
+        $('#menu-toggle').focus();
+        // refresh button text to reflect current state
+        $('#menu-toggle').attr('aria-expanded','false').text('Show Menu');
+      }
+
+      function showModal() {
+        $('#modal').show();
+        $('#modal-overlay').show();
+        // place focus on first focusable element within modal
+        $('#ok').focus();
+        $('#content').attr('aria-hidden','true');
+
+      }
+
+      function hideModal() {
+        $('#modal').hide();
+        $('#modal-overlay').hide();
+        // place focus back on the button that triggered modal
+        $('#submit').focus();
+        $('#content').attr('aria-hidden','false');
+      }
+    </script>
+  </head>
+  <body>
+    <div id="content" role="presentation">
+      <header role="banner">
+        <div id="uw-name">University of Washington</div>
+        <h1 id="event-name">ARIA Bootcamp</h1>
+        <div id="event-date">November 4, 2017</div>
+      </header>
+      <nav role="navigation" aria-label="Main menu">
+        <button type="button" id="menu-toggle" aria-controls="menu" aria-expanded="false" aria-haspopup>Show Menu</button>
+        <div id="menu" role="menu">
+          <ul>
+            <li><a href="#">Menu Item 1</a></li>
+            <li><a href="#">Menu Item 2</a></li>
+            <li><a href="#">Menu Item 3</a></li>
+          </ul>
+        </div>
+      </nav>
+      <main>
+
+        <h2>About this Page</h2>
+        <p>This page includes a variety of accessibility problems.
+          In this workshop we will explore these problems and their solutions.
+        </p>
+
+        <h2>Accessible Web Design</h2>
+        <p>Accessible web design is the practice of designing and developing websites that
+          are usable by everyone, including individuals with disabilities.
+          The World Wide Web Consortium (W3C) has developed
+          <a href="https://www.w3.org/TR/WCAG20/">Web Content Accessibility Guidelines</a>
+          that serve as the de facto standard for how to create accessible web pages
+          and web applications.
+        </p>
+
+        <h2>ARIA</h2>
+        <p>Accessible Rich Internet Applications (ARIA) is a W3C specification that
+          is designed to make interactive web interfaces accessible.
+          It does so by explicitly communicating the roles, states, and properties of
+          user interface elements so assistive technologies such as screen readers
+          and speech recognition technologies can understand them and present them in
+          meaningful ways for their users. ARIA answers questions like:
+        </p>
+        <ul>
+          <li>What is this element?</li>
+          <li>What is its current state? For example, is it selected? expanded? visible?</li>
+        </ul>
+
+        <h2>Post-Workshop Questionnaire</h2>
+
+        <form action="#" method="post">
+
+          <p>Please submit the following form upon completion of the workshop.
+            All fields are required.</p>
+
+          <div id="error" role="alert"></div>
+
+          <div>
+            <label for="name">Your name:</label>
+            <input type="text" id="name" required>
+          </div>
+
+          <div>
+            <label for="question">What have you learned today about ARIA?</label>
+            <textarea id="question" aria-describedby="instructions" required></textarea>
+            <div id="instructions">Please include at least three lessons learned.</div>
+          </div>
+
+          <div>
+            <input type="submit" id="submit" value="Submit">
+          </div>
+
+        </form>
+
+      </main>
+
+      <aside role="complementary">
+        <h2>Resources</h2>
+        <ul>
+          <li><a href="http://washington.edu/accessibility">UW Accessible Technology</a></li>
+          <li><a href="http://washington.edu/accessibility">UW IT Accessibility Guidelines</a></li>
+          <li><a href="http://www.washington.edu/accessibility/checklist/">UW IT Accessibility Checklist</a></li>
+          <li><a href="http://www.washington.edu/accessibility/web/">Developing Accessible Websites</a></li>
+          <li><a href="http://www.washington.edu/accessibility/web/aria/">Using ARIA for Web Applications</a></li>
+        </ul>
+      </aside>
+
+      <footer>
+        <nav role="navigation" aria-label="UW links">
+          <ul>
+            <li><a href="http://uw.edu/home/siteinfo/form">Contact Us</a></li>
+            <li><a href="http://www.washington.edu/jobs">Jobs</a></li>
+            <li><a href="http://www.washington.edu/safety">Campus Safety</a></li>
+            <li><a href="http://myuw.washington.edu/">My UW</a></li>
+            <li><a href="http://www.washington.edu/rules/wac">Rules Docket</a></li>
+            <li><a href="http://www.washington.edu/online/privacy/">Privacy</a></li>
+            <li><a href="http://www.washington.edu/online/terms/">Terms</a></li>
+          </ul>
+        </nav>
+        <div id="copyright" role="contentinfo">
+          &copy; 2016 University of Washington. These materials are provided under a
+          <a href="http://creativecommons.org/licenses/by-nc-sa/3.0/">Creative Commons License</a>
+          and in accordance with UW's <a href="http://www.washington.edu/online/privacy/">privacy policy</a>
+          and <a href="http://www.washington.edu/online/terms">terms of use</a>.
+        </div>
+      </footer>
+
+    </div><!-- end #content -->
+
+    <div id="modal" role="alertdialog" aria-labelledby="modal-heading">
+      <h1 id="modal-heading">Certificate of Completion</h1>
+      <div><span id="participant">You</span> <span id="has-have">have</span>
+        completed the ARIA Bootcamp!
+      </div>
+      <button type="button" id="ok">OK</button>
+    </div>
+    <div id="modal-overlay"></div>
+
+  </body>
+</html>

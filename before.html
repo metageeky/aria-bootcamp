@@ -202,6 +202,12 @@
         font-size: 1.1em;
         border-radius: 5px;
       }
+      #modal button#close {
+        position: absolute;
+        top: 0;
+        right: 0;
+        margin-top: 0;
+      }
 
       /* Visual focus indicator */
       /* Approximates default indicator in WebKit */
@@ -395,6 +401,7 @@
     </div><!-- end #content -->
 
     <div id="modal">
+      <button type="button" id="close">X</button>
       <div class="heading">Certificate of Completion</div>
       <div><span id="participant">You</span> <span id="has-have">have</span>
         completed the ARIA Bootcamp!

@@ -241,14 +241,26 @@
         // create an array of items in the main menu
         var menuItems = $('#menu a');
 
+
+        // temporarily set hidingMenu to true while menu is beign hidden
+        // stopgap to prevent spacebar in Firefox from
+        // triggering a click event after a keydown event
+        var hidingMenu = false;
+
         // handle click on menu button
         $('#menu-toggle').on('click',function(e) {
           if ($('#menu').is(':visible')) {
+            hidingMenu = true;
             hideMenu();
           }
           else {
-            showMenu();
+            if (!hidingMenu) {
+              showMenu();
+            }
           }
+          setTimeout(function() {
+            hidingMenu = false; //reset
+          }, 100);
         });
 
         // handle keystrokes on menu
@@ -258,10 +270,30 @@
             hideMenu();
           }
           else if (e.target.id === 'menu-toggle') {
-            // space, enter, right arrow or down arrow
-            if (e.which === 13 || e.which === 32 || e.which === 39 || e.which === 40) {
+            // enter, right arrow or down arrow
+            if (e.which === 13 || e.which === 39 || e.which === 40) {
               e.preventDefault();
-              showMenu();
+              if ($('#menu').is(':visible')) {
+                hideMenu();
+              }
+              else {
+                showMenu();
+              }
+            }
+            else if (e.which === 32) {
+              e.preventDefault();
+              if ($('#menu').is(':visible')) {
+                if (!hidingMenu) {
+                  hidingMenu = true;
+                  hideMenu();
+                }
+              }
+              else {
+                showMenu();
+              }
+              setTimeout(function() {
+                hidingMenu = false; //reset
+              }, 100);
             }
           }
           else {

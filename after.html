@@ -251,7 +251,7 @@
         $('#menu-toggle').on('click',function(e) {
           if ($('#menu').is(':visible')) {
             hidingMenu = true;
-            hideMenu();
+            hideMenu(true);
           }
           else {
             if (!hidingMenu) {
@@ -267,14 +267,24 @@
         $('#menu-toggle, #menu a').on('keydown',function(e) {
           if (e.which === 27) { // escape
             e.preventDefault();
-            hideMenu();
+            hideMenu(true);
+          }
+          else if (e.which === 9) { // tab
+            setTimeout(function() {
+              // wait briefly for focus to register on newly focused element
+              if (!($('#menu-toggle, #menu a').is(':focus'))) {
+                // newly focused element is NOT part of the menu widget
+                // so close menu
+                hideMenu(false);
+              }
+            },1000);
           }
           else if (e.target.id === 'menu-toggle') {
             // enter, right arrow or down arrow
             if (e.which === 13 || e.which === 39 || e.which === 40) {
               e.preventDefault();
               if ($('#menu').is(':visible')) {
-                hideMenu();
+                hideMenu(true);
               }
               else {
                 showMenu();
@@ -285,7 +295,7 @@
               if ($('#menu').is(':visible')) {
                 if (!hidingMenu) {
                   hidingMenu = true;
-                  hideMenu();
+                  hideMenu(true);
                 }
               }
               else {
@@ -361,10 +371,12 @@
         $('#menu-toggle').attr('aria-expanded','true').text('Hide Menu');
       }
 
-      function hideMenu() {
+      function hideMenu(changeFocus) {
         $('#menu').hide();
-        // place focus on menu toggle button
-        $('#menu-toggle').focus();
+        if (changeFocus) {
+          // place focus on menu toggle button
+          $('#menu-toggle').focus();
+        }
         // refresh button text to reflect current state
         $('#menu-toggle').attr('aria-expanded','false').text('Show Menu');
       }

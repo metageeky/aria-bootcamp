@@ -247,7 +247,6 @@
         // create an array of items in the main menu
         var menuItems = $('#menu a');
 
-
         // temporarily set hidingMenu to true while menu is beign hidden
         // stopgap to prevent spacebar in Firefox from
         // triggering a click event after a keydown event
@@ -367,42 +366,60 @@
           });
         });
 
+        function showMenu() {
+          $('#menu').show();
+          // place focus on first item in menu
+          $('#menu a').first().focus();
+          // refresh button text to reflect current state
+          $('#menu-toggle').attr('aria-expanded','true').text('Hide Menu');
+        }
+
+        function hideMenu(changeFocus) {
+          $('#menu').hide();
+          if (changeFocus) {
+            // place focus on menu toggle button
+            $('#menu-toggle').focus();
+          }
+          // refresh button text to reflect current state
+          $('#menu-toggle').attr('aria-expanded','false').text('Show Menu');
+        }
+
+        function showModal() {
+          $('#modal').show();
+          $('#modal-overlay').show();
+          // place focus on first focusable element within modal
+          $('#close').focus();
+          $('#content').attr('aria-hidden','true');
+          // listen for tab key, and trap keyboard focus within dialog
+          // In a dialog with more numerous or unknown controls,
+          // could create an array of focusable controls within modal and move
+          // forward or backward through the array as user presses
+          // tab or shift+tab
+          $('#modal button').on('keydown',function(e) {
+            if (e.which === 9) { // tab
+              e.preventDefault();
+              if ($(this).attr('id') === 'ok') {
+                // focus was on the ok button. move focus to close button
+                $('#close').focus();
+              }
+              else {
+                // focus was on the close button. move focus to ok button
+                $('#ok').focus();
+              }
+            }
+          });
+        }
+
+        function hideModal() {
+          $('#modal').hide();
+          $('#modal-overlay').hide();
+          // place focus back on the button that triggered modal
+          $('#submit').focus();
+          $('#content').attr('aria-hidden','false');
+        }
+
       });
 
-      function showMenu() {
-        $('#menu').show();
-        // place focus on first item in menu
-        $('#menu a').first().focus();
-        // refresh button text to reflect current state
-        $('#menu-toggle').attr('aria-expanded','true').text('Hide Menu');
-      }
-
-      function hideMenu(changeFocus) {
-        $('#menu').hide();
-        if (changeFocus) {
-          // place focus on menu toggle button
-          $('#menu-toggle').focus();
-        }
-        // refresh button text to reflect current state
-        $('#menu-toggle').attr('aria-expanded','false').text('Show Menu');
-      }
-
-      function showModal() {
-        $('#modal').show();
-        $('#modal-overlay').show();
-        // place focus on first focusable element within modal
-        $('#ok').focus();
-        $('#content').attr('aria-hidden','true');
-
-      }
-
-      function hideModal() {
-        $('#modal').hide();
-        $('#modal-overlay').hide();
-        // place focus back on the button that triggered modal
-        $('#submit').focus();
-        $('#content').attr('aria-hidden','false');
-      }
     </script>
   </head>
   <body>

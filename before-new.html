@@ -52,12 +52,17 @@
         display:inline-block;
         list-style-type: none;
         margin: 1em;
+        padding:0;
         border: 1px solid #999;
       }
       #menu ul li {
         display: inline-block;
         border-right: 1px solid #CCC;
         font-size: 1.2em;
+        margin-right: -5px;
+      }
+      #menu ul li.last {
+        margin-right: 0;
       }
       #menu ul li a {
         display: block;
@@ -300,12 +305,11 @@
           <ul>
             <li><a href="#">Menu Item 1</a></li>
             <li><a href="#">Menu Item 2</a></li>
-            <li><a href="#">Menu Item 3</a></li>
+            <li class="last"><a href="#">Menu Item 3</a></li>
           </ul>
         </div>
       </div>
       <div id="main">
-
         <div class="heading">About this Page <button type="button" id="text-control" aria-controls="supplemental-text" aria-expanded="false">Show more</button></div>
         <p>This page includes a variety of accessibility problems.
           In this workshop we will explore these problems and their solutions.

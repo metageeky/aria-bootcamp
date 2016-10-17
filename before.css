@@ -83,8 +83,11 @@
         padding: 0.25em;
         border: 1px solid #666;
         border-radius: 0.25em;
+        font-size: 1em;
+        background-color: #ECECEC;
       }
-      #text-control:hover {
+      #text-control:hover,
+      #text-control:focus {
         background-color: #4b2e83;
         color: white;
         cursor: pointer;

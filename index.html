@@ -2,26 +2,44 @@
 <html lang="en">
   <head>
     <meta charset="utf-8">
-    <title>Index page - UW ARIA Bootcamp</title>
+    <title>UW ARIA Bootcamp</title>
+    <style>
+      body {
+        font-family: Arial, Helvetica, sans-serif;
+        font-size: 1em;
+        line-height: 1.5em;
+      }
+      h2, ul {
+        margin-left: 1em;
+      }
+      li {
+        line-height: 1.5em;
+      }
+      a:hover,
+      a:focus {
+        border: 1px solid #78aed9 !important;
+        box-shadow: 0 1px 1px rgba(0, 0, 0, 0.075) inset, 0 0 8px rgba(102, 175, 233, 0.6) !important;
+        outline: 0 none !important;
+        text-decoration: none;
+      }
+      /* No need for dotted border on buttons in Firefox */
+      *::-moz-focus-inner {
+        border: 0;
+      }
+    </style>
   </head>
   <body>
     <div id="content" role="presentation">
       <header role="banner">
-        <h1 id="event-name">Index page for ARIA Bootcamp links</h1>
+        <h1 id="event-name">UW ARIA Bootcamp</h1>
       </header>
 
       <main>
-          <h2>Second iteraton links</h2>
+          <h2>Links to Demo Files</h2>
           <ul>
-            <li><a href="before-new.html">before-new.html</a></li>
-            <li><a href="after-new.html">after-new.html</a></li>
+            <li><a href="before.html">before.html</a> - a web page with accessibility problems</li>
+            <li><a href="after.html">after.html</a> - a web page with improved accessibility</li>
           </ul>
-          <h2>First iteration links</h2>
-          <ul>
-            <li><a href="first-iteration/before.html">before.html</a></li>
-            <li><a href="first-iteration/after.html">after.html</a></li>
-          </ul>
-        </nav>
       </main>
 
   </body>

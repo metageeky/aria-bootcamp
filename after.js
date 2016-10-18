@@ -38,6 +38,14 @@ $(document).ready(function() {
     $('#ok, #close').on('click',function() {
       hideModal();
     });
+
+    // add support for escape key to close modal
+    $('#ok, #close').on('keyup',function(event) {
+      if (event.which === 27) {
+        hideModal();
+      }
+    });
+
   });
 
   function showModal() {

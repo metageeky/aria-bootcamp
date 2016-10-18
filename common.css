@@ -40,3 +40,32 @@
         font-size: 1.8em;
         margin: 0.35em 0 0.5em;
       }
+      /* Menu */
+      #menu ul {
+        display:inline-block;
+        list-style-type: none;
+        margin: 1em;
+        padding:0;
+        border: 1px solid #999;
+      }
+      #menu ul li {
+        display: inline-block;
+        border-right: 1px solid #CCC;
+        font-size: 1.2em;
+        margin-right: -5px;
+      }
+      #menu ul li.last {
+        margin-right: -1px;
+      }
+      #menu ul li a {
+        display: block;
+        padding: 0.25em;
+        color: #4b2e83;
+        background-color: white;
+        text-decoration: none;
+      }
+      #menu ul li a:hover,
+      #menu ul li a:focus {
+        background-color: #4b2e83;
+        color: white;
+      }

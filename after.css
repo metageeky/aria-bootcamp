@@ -1,17 +1,17 @@
       /* Footer */
-      footer,
+      footer ul,
       #footer ul {
         list-style-type: none;
       }
-      footer,
+      footer ul li,
       #footer ul li {
         display: inline;
       }
-      footer,
+      footer nav,
       #footer nav {
         margin-bottom: 1em;
       }
-      footer,
+      footer nav a,
       #footer nav a {
         text-decoration: none;
         padding: 0 0.5em;

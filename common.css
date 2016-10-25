@@ -198,3 +198,22 @@
         right: 0;
         margin-top: 0;
       }
+      /* Visual focus indicator */
+      /* Approximates default indicator in WebKit */
+      a:hover,
+      input:hover,
+      textarea:hover,
+      button:hover,
+      *:focus {
+        border: 1px solid #78aed9 !important;
+        box-shadow: 0 1px 1px rgba(0, 0, 0, 0.075) inset, 0 0 8px rgba(102, 175, 233, 0.6) !important;
+        outline: 0 none !important;
+        text-decoration: none;
+      }
+      /* Menu has its own focus indicator */
+      #menu a:hover,
+      #menu a:focus {
+        border: none !important;
+        box-shadow: none !important;
+        outline: none !important;
+      }

@@ -8,23 +8,28 @@
         margin: 0;
         padding: 0;
       }
+      header,
+      footer,
       #banner,
       #footer {
         background-color: #4b2e83;
         padding: 1em;
         color: white;
       }
+      main,
       #main {
         float: left;
         margin: 1em;
         width: 65%;
       }
+      aside,
       #sidebar {
         float: left;
         width: 30%;
         border-left: 1px solid #999;
         padding-left: 1em;
       }
+      footer,
       #footer {
         clear: left;
       }
@@ -100,6 +105,7 @@
       form p {
         margin: 1em;
       }
+      label,
       .label {
         display: block;
         margin-bottom: 0.25em;
@@ -138,14 +144,17 @@
         width: 20em;
       }
       /* Sidebar */
+      aside ul,
       #sidebar ul {
         margin-left: 0;
         padding-left: 1em;
       }
       /* Footer */
+      footer,
       #footer {
         text-align: center;
       }
+      footer,
       #footer a {
         color: white;
       }

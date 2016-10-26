@@ -1,0 +1,22 @@
+-      <div id="banner">
++      <header role="banner" id="banner">
+
+
+-      <div id="menu-wrapper">
+-        <div id="menu">
++      <nav role="navigation" id="menu" aria-label="Main menu">
+
+
+-      <div id="main">
++      <main role="main" id="main">
+
+-            <textarea id="question"></textarea>
++            <textarea id="question" aria-describedby="instructions"></textarea>
+
+-      <div id="sidebar">
++      <aside role="complementary" id="sidebar">
+
+-      <div id="footer">
+-        <div id="footer-links">
++      <footer id="footer">
++        <nav role="navigation" aria-label="UW links">

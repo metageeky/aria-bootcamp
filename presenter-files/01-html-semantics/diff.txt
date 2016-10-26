@@ -44,3 +44,14 @@
 +            <li><a href="http://www.washington.edu/online/privacy/">Privacy</a></li>
 +            <li><a href="http://www.washington.edu/online/terms/">Terms</a></li>
 +          </ul>
+
+
+*CSS*
+
++      #footer-links ul {
++        list-style-type: none;
++      }
++
++      #footer-links ul li {
++        display: inline;
++      }

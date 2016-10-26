@@ -2,38 +2,36 @@
 <html lang="en">
   <head>
     <meta charset="utf-8">
-    <title>HTML Semantics: UW ARIA Bootcamp</title>
+    <title>ARIA in Forms: UW ARIA Bootcamp</title>
     <link href="../../common.css" rel="stylesheet" type="text/css" />
-    <link href="../../before/before.css" rel="stylesheet" type="text/css" />
+    <link href="../../after/after.css" rel="stylesheet" type="text/css" />
     <script src="https://code.jquery.com/jquery-3.1.1.min.js" integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8=" crossorigin="anonymous"></script>
-    <script src="../../before/before.js"></script>
+    <script src="modal1.js"></script>
   </head>
   <body>
 
     <div id="content">
 
-      <div id="banner">
+      <header role="banner" id="banner">
         <div id="uw-name">University of Washington</div>
         <h1 id="event-name">ARIA Bootcamp</h1>
         <div id="event-date">November 4, 2017</div>
-      </div>
+      </header>
 
-      <div id="menu-wrapper">
-        <div id="menu">
+      <nav role="navigation" id="menu" aria-label="Main menu">
           <ul>
             <li><a href="#">Menu Item 1</a></li>
             <li><a href="#">Menu Item 2</a></li>
             <li class="last"><a href="#">Menu Item 3</a></li>
           </ul>
-        </div>
-      </div>
+      </nav>
 
-      <div id="main">
+      <main role="main" id="main">
 
         <h2 class="heading">About this Page</h2>
         <p>This page includes a variety of accessibility problems.
           In this workshop we will explore these problems and their solutions.
-          <button type="button" id="text-control">Show more</button>
+          <button type="button" id="text-control" aria-controls="supplemental-text" aria-expanded="false">Show more</button>
         </p>
         <p id="supplemental-text">
           As an example, this text is initially "hidden" from the user,
@@ -72,16 +70,16 @@
           <p>Please submit the following form upon completion of the workshop.
             All fields are required.</p>
 
-          <div id="error"></div>
+          <div id="error" role="alert"></div>
 
           <div>
             <label for="name" class="label">Your name:</label>
-            <input type="text" id="name">
+            <input type="text" id="name" required>
           </div>
 
           <div>
             <label for="question" class="label">What have you learned today about ARIA?</label>
-            <textarea id="question"></textarea>
+            <textarea id="question" aria-describedby="instructions" required></textarea>
             <div id="instructions">Please include at least three lessons learned.</div>
           </div>
 
@@ -91,9 +89,9 @@
 
         </form>
 
-      </div>
+      </main>
 
-      <div id="sidebar">
+      <aside role="complementary" id="sidebar">
         <h2 class="heading">Resources</h2>
         <ul>
           <li><a href="http://washington.edu/accessibility">UW Accessible Technology</a></li>
@@ -102,10 +100,10 @@
           <li><a href="http://www.washington.edu/accessibility/web/">Developing Accessible Websites</a></li>
           <li><a href="http://www.washington.edu/accessibility/web/aria/">Using ARIA for Web Applications</a></li>
         </ul>
-      </div>
+      </aside>
 
-      <div id="footer">
-        <div id="footer-links">
+      <footer id="footer">
+        <nav role="navigation" aria-label="UW links">
           <ul>
             <li><a href="http://uw.edu/home/siteinfo/form">Contact Us</a></li>
             <li><a href="http://www.washington.edu/jobs">Jobs</a></li>
@@ -115,20 +113,20 @@
             <li><a href="http://www.washington.edu/online/privacy/">Privacy</a></li>
             <li><a href="http://www.washington.edu/online/terms/">Terms</a></li>
           </ul>
-        </div>
-        <div id="copyright">
+        </nav>
+        <div id="copyright" role="contentinfo">
           &copy; 2016 University of Washington. These materials are provided under a
           <a href="http://creativecommons.org/licenses/by-nc-sa/3.0/">Creative Commons License</a>
           and in accordance with UW's <a href="http://www.washington.edu/online/privacy/">privacy policy</a>
           and <a href="http://www.washington.edu/online/terms">terms of use</a>.
         </div>
-      </div>
+      </footer>
 
     </div><!-- end #content -->
 
-    <div id="modal">
-      <button type="button" id="close">X</button>
-      <div class="heading">Certificate of Completion</div>
+    <div id="modal" role="alertdialog" aria-labelledby="modal-heading">
+      <button type="button" id="close" aria-label="Close dialog">X</button>
+      <h1 id="modal-heading" class="heading">Certificate of Completion</h1>
       <div><span id="participant">You</span> <span id="has-have">have</span>
         completed the ARIA Bootcamp!
       </div>

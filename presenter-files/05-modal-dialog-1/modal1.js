@@ -34,10 +34,11 @@ $(document).ready(function() {
       showModal();
     }
 
-    // handle click on ok button within modal
-    $('#ok').on('click',function() {
+    // handle click on ok or close button within modal
+    $('#ok, #close').on('click',function() {
       hideModal();
     });
+
   });
 
 });
@@ -45,6 +46,26 @@ $(document).ready(function() {
 function showModal() {
   $('#modal').show();
   $('#modal-overlay').show();
+  // place focus on first focusable element within modal
+  $('#close').focus();
+  // listen for tab key, and trap keyboard focus within dialog
+  // In a dialog with more numerous or unknown controls,
+  // could create an array of focusable controls within modal and move
+  // forward or backward through the array as user presses
+  // tab or shift+tab
+  $('#modal button').on('keydown',function(e) {
+    if (e.which === 9) { // tab
+      e.preventDefault();
+      if ($(this).attr('id') === 'ok') {
+        // focus was on the ok button. move focus to close button
+        $('#close').focus();
+      }
+      else {
+        // focus was on the close button. move focus to ok button
+        $('#ok').focus();
+      }
+    }
+  });
 }
 
 function hideModal() {
